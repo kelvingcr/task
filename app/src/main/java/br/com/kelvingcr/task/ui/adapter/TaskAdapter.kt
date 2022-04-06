@@ -40,6 +40,10 @@ class TaskAdapter(
         val task = taskList[position]
         holder.binding.textDescription.text = task.description
 
+        holder.binding.btnDelete.setOnClickListener { taskSelected(task, SELECT_REMOVE) }
+        holder.binding.btnEdit.setOnClickListener { taskSelected(task, SELECT_EDIT) }
+        holder.binding.btnDetails.setOnClickListener { taskSelected(task, SELECT_DETAILS) }
+
         when (task.status) {
             0 -> {
                 holder.binding.ibBack.isVisible = false
