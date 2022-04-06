@@ -112,7 +112,7 @@ class TodoFragment : Fragment() {
             }
             TaskAdapter.SELECT_NEXT -> {
                 task.status = 1
-                // updateTask(task)
+                updateTask(task)
             }
         }
     }

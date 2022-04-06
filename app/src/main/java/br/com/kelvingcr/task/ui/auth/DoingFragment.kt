@@ -103,9 +103,13 @@ class DoingFragment : Fragment() {
                       .actionHomeFragmentToFormTaskFragment(task)
                   findNavController().navigate(action)
             }
+            TaskAdapter.SELECT_BACK -> {
+                task.status = 0
+                updateTask(task)
+            }
             TaskAdapter.SELECT_NEXT -> {
-                task.status = 1
-                // updateTask(task)
+                task.status = 2
+                updateTask(task)
             }
         }
     }
@@ -138,6 +142,29 @@ class DoingFragment : Fragment() {
 
         Toast.makeText(requireContext(), R.string.text_task_delete_sucess, Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun updateTask(task: Task) {
+        FirebaseHelper
+            .getDatabase()
+            .child("task")
+            .child(FirebaseHelper.getIdUser() ?: "")
+            .child(task.id)
+            .setValue(task)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.text_task_update_sucess,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    //  showBottomSheet(message = R.string.error_generic)
+                }
+            }.addOnFailureListener {
+                binding.progressBar.isVisible = false
+                // showBottomSheet(message = R.string.error_generic)
+            }
     }
 
     override fun onDestroyView() {
