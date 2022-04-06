@@ -22,7 +22,6 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +33,6 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = Firebase.auth
-
         initClicks();
     }
 
@@ -60,12 +57,13 @@ class RegisterFragment : Fragment() {
     }
 
     private fun registerUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
+        Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                 } else {
                     binding.progressBar.isVisible = false
+                    println(task.exception)
                 }
 
             }

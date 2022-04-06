@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentLoginBinding
-import br.com.kelvingcr.task.databinding.FragmentSplashBinding
+import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class LoginFragment : Fragment() {
@@ -37,6 +41,38 @@ class LoginFragment : Fragment() {
         binding.txtRegister.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+        binding.btnLogin.setOnClickListener{
+            validateData()
+        }
+    }
+
+    private fun validateData() {
+        val email = binding.edtEmail.text.toString().trim();
+        val password = binding.edtPassword.text.toString().trim();
+
+        if (email.isNotEmpty()) {
+            if (password.isNotEmpty()) {
+                binding.progressBar.isVisible = true
+                loginUser(email, password)
+            } else {
+                Toast.makeText(requireContext(), "Informe sua senha", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireContext(), "Informe seu email", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        Firebase.auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                } else {
+                    binding.progressBar.isVisible = false
+                    println(task.exception)
+                }
+
+            }
     }
 
 
@@ -44,6 +80,7 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 
 }

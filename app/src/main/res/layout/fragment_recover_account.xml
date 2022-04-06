@@ -62,6 +62,7 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -71,14 +72,26 @@
                 android:textSize="14sp" />
 
             <Button
+                android:id="@+id/btnSend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_button"
                 android:text="Enviar"
+                android:inputType="textEmailAddress"
                 android:textAllCaps="false"
                 android:textColor="@color/corPrincipal"
                 app:backgroundTint="@null" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                tools:visibility="visible" />
 
 
         </LinearLayout>
