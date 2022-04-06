@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/bg_button.xml" value="0.2165" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/bg_edit.xml" value="0.2165" />
+        <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/bg_task.xml" value="0.248" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/ic_add.xml" value="0.248" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/ic_logout.xml" value="0.2165" />
+        <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/drawable/ic_next.xml" value="0.248" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/activity_main.xml" value="0.3875" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/fragment_doing.xml" value="0.3875" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/fragment_done.xml" value="0.3875" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/fragment_register.xml" value="0.3875" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/fragment_splash.xml" value="0.3734375" />
         <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/fragment_todo.xml" value="0.3875" />
+        <entry key="..\:/Users/Kelvin/AndroidStudioProjects/Task/app/src/main/res/layout/item_adapter.xml" value="0.3875" />
       </map>
     </option>
   </component>
