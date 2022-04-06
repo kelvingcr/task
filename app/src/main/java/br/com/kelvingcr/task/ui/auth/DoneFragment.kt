@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentDoingBinding
 import br.com.kelvingcr.task.databinding.FragmentDoneBinding
 import br.com.kelvingcr.task.model.Task
+import br.com.kelvingcr.task.ui.HomeFragmentDirections
 import br.com.kelvingcr.task.ui.adapter.TaskAdapter
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
 import com.google.firebase.database.DataSnapshot
@@ -97,9 +99,9 @@ class DoneFragment : Fragment() {
                 deleteTask(task)
             }
             TaskAdapter.SELECT_EDIT -> {
-                /*  val action = HomeFragmentDirections
+                 val action = HomeFragmentDirections
                       .actionHomeFragmentToFormTaskFragment(task)
-                  findNavController().navigate(action) */
+                  findNavController().navigate(action)
             }
             TaskAdapter.SELECT_NEXT -> {
                 task.status = 1

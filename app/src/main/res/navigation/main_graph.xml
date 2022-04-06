@@ -69,5 +69,10 @@
         android:id="@+id/formTaskFragment"
         android:name="br.com.kelvingcr.task.ui.FormTaskFragment"
         android:label="fragment_form_task"
-        tools:layout="@layout/fragment_form_task" />
+        tools:layout="@layout/fragment_form_task" >
+        <argument
+            android:name="task"
+            app:argType="br.com.kelvingcr.task.model.Task"
+            app:nullable="true" />
+    </fragment>
 </navigation>

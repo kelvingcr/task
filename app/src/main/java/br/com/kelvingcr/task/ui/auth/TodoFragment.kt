@@ -13,6 +13,7 @@ import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentHomeBinding
 import br.com.kelvingcr.task.databinding.FragmentTodoBinding
 import br.com.kelvingcr.task.model.Task
+import br.com.kelvingcr.task.ui.HomeFragmentDirections
 import br.com.kelvingcr.task.ui.adapter.TaskAdapter
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
 import com.google.firebase.database.DataSnapshot
@@ -105,9 +106,9 @@ class TodoFragment : Fragment() {
                 deleteTask(task)
             }
             TaskAdapter.SELECT_EDIT -> {
-                /*  val action = HomeFragmentDirections
+                 val action = HomeFragmentDirections
                       .actionHomeFragmentToFormTaskFragment(task)
-                  findNavController().navigate(action) */
+                  findNavController().navigate(action)
             }
             TaskAdapter.SELECT_NEXT -> {
                 task.status = 1
@@ -144,6 +145,29 @@ class TodoFragment : Fragment() {
 
         Toast.makeText(requireContext(), R.string.text_task_delete_sucess, Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun updateTask(task: Task) {
+        FirebaseHelper
+            .getDatabase()
+            .child("task")
+            .child(FirebaseHelper.getIdUser() ?: "")
+            .child(task.id)
+            .setValue(task)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.text_task_update_sucess,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                  //  showBottomSheet(message = R.string.error_generic)
+                }
+            }.addOnFailureListener {
+                binding.progressBar.isVisible = false
+               // showBottomSheet(message = R.string.error_generic)
+            }
     }
 
     override fun onDestroyView() {
