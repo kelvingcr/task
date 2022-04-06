@@ -1,4 +1,3 @@
-
 package br.com.kelvingcr.task.ui
 
 import android.os.Bundle
@@ -11,6 +10,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentSplashBinding
+import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import com.google.firebase.ktx.Firebase
 
 class SplashFragment : Fragment() {
 
@@ -28,19 +29,25 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler(Looper.getMainLooper()).postDelayed(this::checkAuth, 3000) //depois de 3 segundos ele chama a função
+        Handler(Looper.getMainLooper()).postDelayed(
+            this::checkAuth,
+            3000
+        ) //depois de 3 segundos ele chama a função
 
     }
 
-    private fun checkAuth(){
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+    private fun checkAuth() {
+        if (FirebaseHelper.isAutenticated()) {
+            findNavController().navigate(R.id.action_splashFragment_to_homeFragment2)
+        } else {
+            findNavController().navigate(R.id.action_splashFragment_to_autentication)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }
