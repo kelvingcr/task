@@ -12,6 +12,7 @@ import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentLoginBinding
 import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import br.com.kelvingcr.task.ui.helper.showBottomSheet
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -57,10 +58,14 @@ class LoginFragment : BaseFragment() {
                 binding.progressBar.isVisible = true
                 loginUser(email, password)
             } else {
-                Toast.makeText(requireContext(), "Informe sua senha", Toast.LENGTH_SHORT).show()
+                showBottomSheet(
+                    message = R.string.text_password_empty_login_fragment
+                )
             }
         } else {
-            Toast.makeText(requireContext(), "Informe seu email", Toast.LENGTH_SHORT).show()
+            showBottomSheet(
+                message = R.string.text_email_empty_login_fragment
+            )
         }
     }
 

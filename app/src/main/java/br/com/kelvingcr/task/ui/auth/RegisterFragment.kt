@@ -15,6 +15,7 @@ import br.com.kelvingcr.task.databinding.FragmentSplashBinding
 import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
 import br.com.kelvingcr.task.ui.helper.initToolbar
+import br.com.kelvingcr.task.ui.helper.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -50,10 +51,10 @@ class RegisterFragment : BaseFragment() {
                 binding.progressBar.isVisible = true
                 registerUser(email, password)
             } else {
-                Toast.makeText(requireContext(), "Informe sua senha", Toast.LENGTH_SHORT).show()
+                showBottomSheet(message = R.string.text_password_empty_register_fragment)
             }
         } else {
-            Toast.makeText(requireContext(), "Informe seu email", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.text_email_empty_register_fragment)
         }
     }
 
@@ -67,7 +68,11 @@ class RegisterFragment : BaseFragment() {
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.action_global_homeFragment)
                 } else {
-                    Toast.makeText(requireContext(), FirebaseHelper.validError(task.exception?.message ?: ""), Toast.LENGTH_SHORT).show()
+                    showBottomSheet(
+                        message = FirebaseHelper.validError(
+                            task.exception?.message ?: ""
+                        )
+                    )
                     binding.progressBar.isVisible = false
                     println(task.exception)
                 }

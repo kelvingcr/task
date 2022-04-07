@@ -14,6 +14,7 @@ import br.com.kelvingcr.task.databinding.FragmentRecoverAccountBinding
 import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
 import br.com.kelvingcr.task.ui.helper.initToolbar
+import br.com.kelvingcr.task.ui.helper.showBottomSheet
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -37,7 +38,7 @@ class RecoverAccountFragment : BaseFragment() {
         initClicks()
     }
 
-    private fun initClicks(){
+    private fun initClicks() {
         binding.btnSend.setOnClickListener { validateData() }
     }
 
@@ -45,10 +46,10 @@ class RecoverAccountFragment : BaseFragment() {
         val email = binding.edtEmail.text.toString().trim();
 
         if (email.isNotEmpty()) {
-                binding.progressBar.isVisible = true
+            binding.progressBar.isVisible = true
             recoveryUser(email)
         } else {
-            Toast.makeText(requireContext(), "Informe seu email", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.text_email_empty_recover_account_fragment)
         }
     }
 
@@ -57,13 +58,14 @@ class RecoverAccountFragment : BaseFragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     hideKeyboard()
-                    Toast.makeText(requireContext(), "Pronto, acabamos de enviar um link para seu e-mail.", Toast.LENGTH_SHORT).show()
-                    binding.progressBar.isVisible = false
+                    showBottomSheet(
+                        message = R.string.text_email_send_sucess_recover_account_fragment
+                    )
                 } else {
-                    Toast.makeText(requireContext(), FirebaseHelper.validError(task.exception?.message ?: ""), Toast.LENGTH_SHORT).show()
-                    binding.progressBar.isVisible = false
+                    showBottomSheet(
+                        message = FirebaseHelper.validError(task.exception?.message ?: "")
+                    )
                 }
-
             }
     }
 
