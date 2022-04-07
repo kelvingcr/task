@@ -12,7 +12,7 @@
 
 Esse aplicativo foi desenvolvido para ajudar pessoas a organizar suas tarefas;   
 Funciona como etapas, das quais: "A Fazer", "Fazendo" e "Feitas";   
-O usuário precisa criar um conta no aplicavo para criar as tarefas, o usuário terá seu proprio armazenamento.   
+O usuário precisa criar um conta no aplicativo para criar as tarefas, o usuário terá seu próprio armazenamento.   
 
 Sistemas que o compõem:
 
