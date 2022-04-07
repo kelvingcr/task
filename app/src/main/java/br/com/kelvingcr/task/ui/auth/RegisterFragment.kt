@@ -12,12 +12,14 @@ import androidx.navigation.fragment.findNavController
 import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentRegisterBinding
 import br.com.kelvingcr.task.databinding.FragmentSplashBinding
+import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import br.com.kelvingcr.task.ui.helper.initToolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
 
 
     private var _binding: FragmentRegisterBinding? = null
@@ -34,6 +36,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
         initClicks();
     }
 
@@ -43,6 +46,7 @@ class RegisterFragment : Fragment() {
 
         if (email.isNotEmpty()) {
             if (password.isNotEmpty()) {
+                hideKeyboard()
                 binding.progressBar.isVisible = true
                 registerUser(email, password)
             } else {

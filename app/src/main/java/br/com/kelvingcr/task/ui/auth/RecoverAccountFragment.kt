@@ -11,12 +11,14 @@ import androidx.navigation.fragment.findNavController
 import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentLoginBinding
 import br.com.kelvingcr.task.databinding.FragmentRecoverAccountBinding
+import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import br.com.kelvingcr.task.ui.helper.initToolbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class RecoverAccountFragment : Fragment() {
+class RecoverAccountFragment : BaseFragment() {
 
     private var _binding: FragmentRecoverAccountBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +33,7 @@ class RecoverAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
         initClicks()
     }
 
@@ -53,6 +56,7 @@ class RecoverAccountFragment : Fragment() {
         Firebase.auth.sendPasswordResetEmail(email)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+                    hideKeyboard()
                     Toast.makeText(requireContext(), "Pronto, acabamos de enviar um link para seu e-mail.", Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                 } else {

@@ -15,13 +15,14 @@ import br.com.kelvingcr.task.databinding.FragmentTodoBinding
 import br.com.kelvingcr.task.model.Task
 import br.com.kelvingcr.task.ui.HomeFragmentDirections
 import br.com.kelvingcr.task.ui.adapter.TaskAdapter
+import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 
-class TodoFragment : Fragment() {
+class TodoFragment : BaseFragment() {
 
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!

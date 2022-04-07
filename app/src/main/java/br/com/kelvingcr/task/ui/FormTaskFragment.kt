@@ -13,9 +13,11 @@ import br.com.kelvingcr.task.R
 import br.com.kelvingcr.task.databinding.FragmentFormTaskBinding
 import br.com.kelvingcr.task.databinding.FragmentSplashBinding
 import br.com.kelvingcr.task.model.Task
+import br.com.kelvingcr.task.ui.helper.BaseFragment
 import br.com.kelvingcr.task.ui.helper.FirebaseHelper
+import br.com.kelvingcr.task.ui.helper.initToolbar
 
-class FormTaskFragment : Fragment() {
+class FormTaskFragment : BaseFragment() {
 
     private val args: FormTaskFragmentArgs by navArgs()
 
@@ -36,6 +38,7 @@ class FormTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
         initListeners()
         getArgs()
     }
@@ -92,6 +95,7 @@ class FormTaskFragment : Fragment() {
         val description = binding.edtDescription.text.toString().trim()
 
         if (description.isNotEmpty()) {
+            hideKeyboard()
             binding.progressBar.isVisible = true
 
             if (newTask) task = Task()
