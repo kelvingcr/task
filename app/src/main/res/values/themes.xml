@@ -14,8 +14,6 @@
         <!-- Customize your theme here. -->
 
         <item name="android:windowBackground">@color/corPrincipal</item>
-
-
     </style>
 
     <style name="CustomTabLayout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -31,5 +29,6 @@
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
 
 </resources>
